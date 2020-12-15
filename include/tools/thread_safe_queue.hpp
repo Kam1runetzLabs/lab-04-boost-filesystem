@@ -30,13 +30,15 @@ class thread_safe_queue {
 };
 
 template <typename T>
-thread_safe_queue<T>::thread_safe_queue() : mutex(), empty(), container() {}
+thread_safe_queue<T>::thread_safe_queue() : mutex(), empty(), container() {
+  container.push(nullptr);
+}
 
 template <typename T>
 void thread_safe_queue<T>::enqueue(T &&value) {
   std::unique_lock<std::mutex> lock(mutex);
   container.push(std::forward<T>(value));
-  empty.notify_all();
+  empty.notify_one();
 }
 
 template <typename T>
@@ -55,7 +57,7 @@ template <typename... args_t>
 void thread_safe_queue<T>::emplace(args_t &&... args) {
   std::unique_lock<std::mutex> lock(mutex);
   container.emplace(std::forward<args_t...>(args)...);
-  empty.notify_all();
+  empty.notify_one();
 }
 
 #endif  // BFSYSTEM_THREAD_SAFE_QUEUE_HPP

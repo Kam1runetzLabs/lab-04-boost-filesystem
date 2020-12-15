@@ -13,6 +13,7 @@
 namespace brokers_analyse {
 class broker {
  public:
+  broker();
   broker(std::string name, std::set<std::string> accounts,
          std::vector<financial_file> files);
 

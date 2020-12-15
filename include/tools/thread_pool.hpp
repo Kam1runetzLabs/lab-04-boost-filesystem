@@ -27,21 +27,6 @@ class thread_pool {
   thread_safe_queue<std::function<void(void)>> tasks_;
 };
 
-thread_pool::thread_pool(std::size_t workers_count) {
-  for (std::size_t i = 0; i < workers_count; ++i) {
-    workers_.emplace_back([this] {
-      for (;;) {
-        auto work_item = tasks_.pop();
-        if (!work_item) {
-          tasks_.enqueue(nullptr);
-          break;
-        }
-        work_item();
-      }
-    });
-  }
-}
-
 template <typename task_t, typename... args_t>
 std::future<typename std::result_of<task_t(args_t...)>::type>
 thread_pool::enqueue_task(task_t &&task, args_t &&... args) {
@@ -51,11 +36,6 @@ thread_pool::enqueue_task(task_t &&task, args_t &&... args) {
   auto res = packaged_task->get_future();
   tasks_.emplace([packaged_task] { (*packaged_task)(); });
   return res;
-}
-
-thread_pool::~thread_pool() {
-  tasks_.enqueue(nullptr);
-  for (auto &worker : workers_) worker.join();
 }
 
 #endif  // BFSYSTEM_THREAD_POOL_HPP

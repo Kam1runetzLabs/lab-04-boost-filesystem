@@ -7,6 +7,8 @@
 
 using namespace brokers_analyse;
 
+broker::broker() : name_(), accounts_(), files_() {}
+
 broker::broker(std::string name, std::set<std::string> accounts,
                std::vector<financial_file> files)
     : name_(std::move(name)),

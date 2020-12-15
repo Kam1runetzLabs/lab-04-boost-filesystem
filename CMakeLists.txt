@@ -40,9 +40,10 @@ add_library(${PROJECT_NAME} STATIC
         include/brokers_analyse/broker.hpp
         include/brokers_analyse/analyser.hpp
         include/brokers_analyse.hpp
-        sources/broker.cpp sources/financial_file.cpp)
+        sources/brokers_analyse/broker.cpp sources/brokers_analyse/financial_file.cpp
+        sources/brokers_analyse/analyser.cpp include/brokers_analyse/proxy_broker.hpp sources/brokers_analyse/proxy_broker.cpp sources/tools/thead_pool.cpp)
 
-add_executable(demo
+add_executable(demo_${PROJECT_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}/demo/main.cpp
         )
 
@@ -52,7 +53,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
         "$<INSTALL_INTERFACE:include>"
         )
 target_link_libraries(${PROJECT_NAME} Boost::filesystem)
-target_link_libraries(demo ${PROJECT_NAME})
+target_link_libraries(demo_${PROJECT_NAME} ${PROJECT_NAME})
 
 if (BUILD_TESTS)
     add_executable(tests
@@ -85,7 +86,7 @@ endif ()
 
 include(CPackConfig.cmake)
 
-install(TARGETS ${PROJECT_NAME} demo
+install(TARGETS ${PROJECT_NAME} demo_${PROJECT_NAME}
         EXPORT "${PROJECT_NAME}-targets"
         RUNTIME DESTINATION bin
         ARCHIVE DESTINATION lib

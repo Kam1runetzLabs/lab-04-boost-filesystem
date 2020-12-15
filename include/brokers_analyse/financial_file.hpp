@@ -7,10 +7,15 @@
 
 #include <string>
 
+const std::size_t date_string_length = 8;
+const std::size_t account_string_length = 8;
+const std::string file_type_string = "balance";
+
 namespace brokers_analyse {
 class financial_file {
  public:
-  financial_file(const std::string &account, const std::string &date);
+  financial_file();
+  financial_file(std::string account, std::string date);
   std::string file_name() const;
 
   std::string account() const;
