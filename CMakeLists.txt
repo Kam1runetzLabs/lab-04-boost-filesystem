@@ -22,9 +22,9 @@ HunterGate(
 
 
 project(bfsystem VERSION 0.1.0)
-string(APPEND CMAKE_CXX_FLAGS " -pedantic -Werror -Wall -Wextra")
-string(APPEND CMAKE_CXX_FLAGS " -Wno-unused-command-line-argument")
-string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
+#string(APPEND CMAKE_CXX_FLAGS " -pedantic -Werror -Wall -Wextra")
+#string(APPEND CMAKE_CXX_FLAGS " -Wno-unused-command-line-argument")
+#string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
 string(APPEND CMAKE_CXX_FLAGS " -lpthread")
 
 hunter_add_package(GTest)
@@ -34,14 +34,12 @@ hunter_add_package(Boost COMPONENTS filesystem)
 find_package(Boost CONFIG REQUIRED filesystem)
 
 add_library(${PROJECT_NAME} STATIC
-        include/tools/thread_safe_queue.hpp
-        include/tools/thread_pool.hpp
-        include/brokers_analyse/financial_file.hpp
-        include/brokers_analyse/broker.hpp
-        include/brokers_analyse/analyser.hpp
         include/brokers_analyse.hpp
-        sources/brokers_analyse/broker.cpp sources/brokers_analyse/financial_file.cpp
-        sources/brokers_analyse/analyser.cpp include/brokers_analyse/proxy_broker.hpp sources/brokers_analyse/proxy_broker.cpp sources/tools/thead_pool.cpp)
+        include/brokers_analyse/broker.hpp
+        include/brokers_analyse/financial_file.hpp
+        include/brokers_analyse/analysers.hpp
+        sources/analysers.cpp include/tools/thread_pool.hpp
+        sources/tools/thread_pool.cpp include/tools/task.hpp include/tools/callback.hpp)
 
 add_executable(demo_${PROJECT_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}/demo/main.cpp

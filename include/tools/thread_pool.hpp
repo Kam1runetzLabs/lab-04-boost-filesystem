@@ -1,41 +1,43 @@
 //
-// Created by w1ckedente on 14.12.2020.
+// Created by w1ckedente on 17.12.2020.
 //
 
 #ifndef BFSYSTEM_THREAD_POOL_HPP
 #define BFSYSTEM_THREAD_POOL_HPP
 
+#include <condition_variable>
 #include <functional>
 #include <future>
 #include <memory>
+#include <mutex>
+#include <queue>
 #include <thread>
-#include <tools/thread_safe_queue.hpp>
 #include <vector>
+
 
 class thread_pool {
  public:
   explicit thread_pool(
       std::size_t workers_count = std::thread::hardware_concurrency());
-  thread_pool(const thread_pool &) = delete;
-  template <typename task_t, typename... args_t>
-  std::future<typename std::result_of<task_t(args_t...)>::type> enqueue_task(
-      task_t &&task, args_t &&... args);
   ~thread_pool();
 
- private:
-  std::vector<std::thread> workers_;
-  thread_safe_queue<std::function<void(void)>> tasks_;
-};
+  template <typename task_t, typename callback_t>
+  void execute(task_t&& task, callback_t&& callback) {
+    auto workers_task = std::make_shared<std::packaged_task<void()>>(std::bind(
+        std::forward<callback_t>(callback), std::forward<task_t>(task)));
+    {
+      std::unique_lock<std::mutex> lock(_mutex);
+      _tasks_queue.emplace([workers_task] { (*workers_task)(); });
+    }
+    _available_to_job.notify_one();
+  }
 
-template <typename task_t, typename... args_t>
-std::future<typename std::result_of<task_t(args_t...)>::type>
-thread_pool::enqueue_task(task_t &&task, args_t &&... args) {
-  using ret_t = typename std::result_of<task_t(args_t...)>::type;
-  auto packaged_task = std::make_shared<std::packaged_task<ret_t()>>(
-      std::bind(std::forward<task_t>(task), std::forward<args_t>(args)...));
-  auto res = packaged_task->get_future();
-  tasks_.emplace([packaged_task] { (*packaged_task)(); });
-  return res;
-}
+ private:
+  std::vector<std::thread> _worker_threads;
+  std::queue<std::function<void()>> _tasks_queue;
+  std::mutex _mutex;
+  std::condition_variable _available_to_job;
+  bool _is_stopped;
+};
 
 #endif  // BFSYSTEM_THREAD_POOL_HPP
