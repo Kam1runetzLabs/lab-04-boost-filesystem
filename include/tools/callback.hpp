@@ -10,8 +10,8 @@
 
 template <typename task_t, typename... args_t>
 inline auto CALLBACK(task_t&& task, args_t&&... args) {
-  return std::move(std::bind(std::forward<task_t>(task), std::placeholders::_1,
-                             std::forward<args_t>(args)...));
+  return std::bind(std::forward<task_t>(task), std::placeholders::_1,
+                   std::forward<args_t>(args)...);
 }
 
 #endif  // BFSYSTEM_CALLBACK_HPP

@@ -2,16 +2,17 @@
 
 #include <gtest/gtest.h>
 
-#include <boost/filesystem.hpp>
-#include <chrono>
+#include <brokers_analyse.hpp>
 #include <iostream>
-#include <string>
-#include <tools/callback.hpp>
-#include <tools/task.hpp>
-#include <tools/thread_pool.hpp>
 #include <vector>
 
-
+using namespace brokers_analyse;
 TEST(Example, EmptyTest) {
+  auto brokers = analyse_all(policy::parallel, "../misc/ftp");
+  std::cout << "TOTAL BROKERS: " << brokers.size() << std::endl;
+  for (const auto &broker : brokers) {
+    std::cout << broker.name << " files: " << broker.files.size() << " files"
+              << std::endl;
+  }
   EXPECT_TRUE(true);
 }

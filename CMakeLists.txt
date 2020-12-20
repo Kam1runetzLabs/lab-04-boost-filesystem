@@ -26,6 +26,7 @@ project(bfsystem VERSION 0.1.0)
 #string(APPEND CMAKE_CXX_FLAGS " -Wno-unused-command-line-argument")
 #string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
 string(APPEND CMAKE_CXX_FLAGS " -lpthread")
+string(APPEND CMAKE_CXX_FLAGS " -g")
 
 hunter_add_package(GTest)
 find_package(GTest CONFIG REQUIRED)
@@ -39,7 +40,7 @@ add_library(${PROJECT_NAME} STATIC
         include/brokers_analyse/financial_file.hpp
         include/brokers_analyse/analysers.hpp
         sources/analysers.cpp include/tools/thread_pool.hpp
-        sources/tools/thread_pool.cpp include/tools/task.hpp include/tools/callback.hpp)
+        sources/tools/thread_pool.cpp include/tools/task.hpp include/tools/callback.hpp sources/brokers_analyse/broker.cpp)
 
 add_executable(demo_${PROJECT_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}/demo/main.cpp
