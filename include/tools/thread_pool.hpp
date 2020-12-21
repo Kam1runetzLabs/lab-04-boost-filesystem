@@ -20,9 +20,8 @@ class thread_pool {
 
   template <typename task_t, typename callback_t>
   void execute(task_t&& task, callback_t&& callback) {
-    auto workers_task = std::make_shared<std::packaged_task<void()>>(
-        std::bind(std::forward<callback_t>(callback),
-                  std::forward<decltype(task())>(task())));
+    auto workers_task = std::make_shared<std::packaged_task<void()>>(std::bind(
+        std::forward<callback_t>(callback), std::forward<task_t>(task)));
 
     {
       std::unique_lock<std::mutex> lock(_mutex);
