@@ -13,7 +13,7 @@ std::string broker::name() const { return _name; }
 
 void broker::set_name(const std::string &name) { _name = name; }
 
-const acc_files_map &broker::files() const { return _files; }
+acc_files_map broker::files() const { return _files; }
 
 void broker::insert_file(const std::string &account,
                          const financial_file &file) {

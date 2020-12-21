@@ -19,7 +19,7 @@ class broker {
   std::string name() const;
   void set_name(const std::string &name);
 
-  const acc_files_map &files() const;
+  acc_files_map files() const;
   void insert_file(const std::string &account, const financial_file &file);
 
   bool valid() const;
