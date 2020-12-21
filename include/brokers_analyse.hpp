@@ -7,6 +7,7 @@
 
 #include <brokers_analyse/analysers.hpp>
 #include <brokers_analyse/broker.hpp>
+#include <brokers_analyse/definitions.hpp>
 #include <brokers_analyse/financial_file.hpp>
 
 #endif  // BFSYSTEM_BROKERS_ANALYSE_HPP

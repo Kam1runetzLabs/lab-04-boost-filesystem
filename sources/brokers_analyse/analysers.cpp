@@ -6,8 +6,7 @@
 #include <boost/filesystem.hpp>
 #include <brokers_analyse/analysers.hpp>
 #include <brokers_analyse/broker.hpp>
-#include <brokers_analyse/financial_file.hpp>
-#include <set>
+#include <brokers_analyse/definitions.hpp>
 #include <string>
 #include <vector>
 
@@ -26,23 +25,25 @@ static std::vector<std::string> _split_string(const std::string &text) {
   return ret;
 }
 
-void _processing_filename(const std::string &filename,
-                          std::vector<financial_file> &files,
-                          std::set<std::string> &accounts) {
-  auto string_tokens = _split_string(filename);
-  if (string_tokens.size() != 3) return;
-  if (string_tokens[0] != "balance") return;
-  if (string_tokens[1].length() != 8) return;
-  if (string_tokens[2].length() != 8) return;
+void _processing_filename(const std::string &filename, acc_files_map &files) {
+  auto filename_tokens = _split_string(filename);
+  if (filename_tokens.size() != filename_tokens_count) return;
 
-  files.push_back(financial_file{string_tokens[1], string_tokens[2]});
-  accounts.insert(string_tokens[1]);
+  auto type = filename_tokens[0];
+  auto account = filename_tokens[1];
+  auto date = filename_tokens[2];
+
+  if (type != file_type) return;
+  if (account.length() != account_length) return;
+  if (date.length() != date_length) return;
+
+  files[account].emplace_back(filename, date);
 }
 
 broker analyse_one(const std::string &path) {
   std::string name;
-  std::set<std::string> accounts;
-  std::vector<financial_file> files;
+  acc_files_map files;
+
   const d_path broker_directory{path};
   if (!boost::filesystem::is_directory(broker_directory))
     throw std::runtime_error(
@@ -53,11 +54,8 @@ broker analyse_one(const std::string &path) {
         !entry.path().filename().stem().extension().string().empty() ||
         entry.path().extension().string() != ".txt")
       continue;
-    //    todo symlinks processing
-    _processing_filename(entry.path().filename().stem().string(), files,
-                         accounts);
+    _processing_filename(entry.path().filename().stem().string(), files);
   }
-
-  return broker{name, accounts, files};
+  return broker(name, files);
 }
 }  // namespace brokers_analyse

@@ -9,6 +9,7 @@
 using namespace brokers_analyse;
 
 void broker_processing(const broker &brok) {
+  if (brok.valid()) std::cout << brok.name() << std::endl;
 }
 
 TEST(Example, EmptyTest) {

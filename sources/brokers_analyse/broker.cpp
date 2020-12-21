@@ -2,17 +2,24 @@
 // Created by w1ckedente on 20.12.2020.
 //
 
-#include <algorithm>
 #include <brokers_analyse/broker.hpp>
+#include <utility>
 
-bool brokers_analyse::broker::valid() const {
-  return !(name.empty() || accounts.empty() || files.empty()) &&
-         std::all_of(accounts.cbegin(), accounts.cend(),
-                     [](const std::string &acc) -> bool {
-                       return acc.length() == 8;
-                     }) &&
-         std::all_of(files.cbegin(), files.cend(),
-                     [](const financial_file &file) -> bool {
-                       return file.date.length() == 8;
-                     });
+namespace brokers_analyse {
+broker::broker(std::string name, acc_files_map files)
+    : _name(std::move(name)), _files(std::move(files)) {}
+
+std::string broker::name() const { return _name; }
+
+void broker::set_name(const std::string &name) { _name = name; }
+
+const acc_files_map &broker::files() const { return _files; }
+
+void broker::insert_file(const std::string &account,
+                         const financial_file &file) {
+  _files[account].push_back(file);
 }
+
+bool broker::valid() const { return !(_name.empty() || _files.empty()); }
+
+}  // namespace brokers_analyse

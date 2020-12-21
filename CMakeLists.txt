@@ -44,7 +44,7 @@ add_library(${PROJECT_NAME} STATIC
         include/tools/thread_pool.hpp
         sources/tools/thread_pool.cpp
         include/tools/task.hpp
-        include/tools/callback.hpp sources/brokers_analyse/financial_file.cpp)
+        include/tools/callback.hpp sources/brokers_analyse/financial_file.cpp include/brokers_analyse/definitions.hpp)
 
 add_executable(demo_${PROJECT_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}/demo/main.cpp

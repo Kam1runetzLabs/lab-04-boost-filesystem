@@ -8,10 +8,21 @@
 #include <string>
 
 namespace brokers_analyse {
-struct financial_file {
-  std::string account;
-  std::string date;
-  std::string full_name() const;
+class financial_file {
+ public:
+  financial_file() = default;
+  financial_file(std::string name, std::string date);
+  std::string name() const;
+  void set_name(const std::string &name);
+
+  std::string date() const;
+  void set_date(const std::string &date);
+
+  bool valid() const;
+
+ private:
+  std::string _name;
+  std::string _date;
 };
 }  // namespace brokers_analyse
 
