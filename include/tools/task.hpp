@@ -1,6 +1,4 @@
-//
-// Created by w1ckedente on 18.12.2020.
-//
+// Copyright 2020 Kam1runetzLabs <notsoserious2017@gmail.com>
 
 #ifndef BFSYSTEM_TASK_HPP
 #define BFSYSTEM_TASK_HPP

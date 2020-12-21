@@ -1,6 +1,5 @@
-//
-// Created by w1ckedente on 21.12.2020.
-//
+// Copyright 2020 Kam1runetzLabs <notsoserious2017@gmail.com>
+
 #include <brokers_analyse/definitions.hpp>
 #include <brokers_analyse/financial_file.hpp>
 #include <utility>

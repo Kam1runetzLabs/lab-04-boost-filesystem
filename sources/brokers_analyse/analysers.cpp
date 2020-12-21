@@ -1,6 +1,4 @@
-//
-// Created by w1ckedente on 17.12.2020.
-//
+// Copyright 2020 Kam1runetzLabs <notsoserious2017@gmail.com>
 
 #include <algorithm>
 #include <boost/filesystem.hpp>
