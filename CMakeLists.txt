@@ -22,9 +22,9 @@ HunterGate(
 
 
 project(bfsystem VERSION 0.1.0)
-#string(APPEND CMAKE_CXX_FLAGS " -pedantic -Werror -Wall -Wextra")
-#string(APPEND CMAKE_CXX_FLAGS " -Wno-unused-command-line-argument")
-#string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
+string(APPEND CMAKE_CXX_FLAGS " -pedantic -Werror -Wall -Wextra")
+string(APPEND CMAKE_CXX_FLAGS " -Wno-unused-command-line-argument")
+string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
 string(APPEND CMAKE_CXX_FLAGS " -lpthread")
 string(APPEND CMAKE_CXX_FLAGS " -g")
 
@@ -44,7 +44,9 @@ add_library(${PROJECT_NAME} STATIC
         include/tools/thread_pool.hpp
         sources/tools/thread_pool.cpp
         include/tools/task.hpp
-        include/tools/callback.hpp sources/brokers_analyse/financial_file.cpp include/brokers_analyse/definitions.hpp)
+        include/tools/callback.hpp
+        sources/brokers_analyse/financial_file.cpp
+        include/brokers_analyse/definitions.hpp)
 
 add_executable(demo_${PROJECT_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}/demo/main.cpp
