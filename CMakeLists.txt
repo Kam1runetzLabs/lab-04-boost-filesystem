@@ -22,17 +22,20 @@ HunterGate(
 
 
 project(bfsystem VERSION 0.1.0)
+set(THREADS_PREFER_PTHREAD_FLAG ON)
 string(APPEND CMAKE_CXX_FLAGS " -pedantic -Werror -Wall -Wextra")
 string(APPEND CMAKE_CXX_FLAGS " -Wno-unused-command-line-argument")
 string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
-string(APPEND CMAKE_CXX_FLAGS " -lpthread")
 string(APPEND CMAKE_CXX_FLAGS " -g")
+
 
 hunter_add_package(GTest)
 find_package(GTest CONFIG REQUIRED)
 
 hunter_add_package(Boost COMPONENTS filesystem)
 find_package(Boost CONFIG REQUIRED filesystem)
+
+find_package(Threads REQUIRED)
 
 add_library(${PROJECT_NAME} STATIC
         include/brokers_analyse.hpp
@@ -57,7 +60,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
         "$<BUILD_INTERFACE:${Boost_INCLUDE_DIRS}>"
         "$<INSTALL_INTERFACE:include>"
         )
-target_link_libraries(${PROJECT_NAME} Boost::filesystem)
+target_link_libraries(${PROJECT_NAME} Boost::filesystem Threads::Threads)
 target_link_libraries(demo_${PROJECT_NAME} ${PROJECT_NAME})
 
 if (BUILD_TESTS)
