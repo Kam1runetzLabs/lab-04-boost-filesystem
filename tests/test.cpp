@@ -7,12 +7,11 @@
 #include <vector>
 
 using namespace brokers_analyse;
+
+void broker_processing(const broker &brok) {
+}
+
 TEST(Example, EmptyTest) {
-  auto brokers = analyse_all(policy::parallel, "../misc/ftp");
-  std::cout << "TOTAL BROKERS: " << brokers.size() << std::endl;
-  for (const auto &broker : brokers) {
-    std::cout << broker.name << " files: " << broker.files.size() << " files"
-              << std::endl;
-  }
+  analyse_all(policy::parallel, "../misc/ftp", broker_processing);
   EXPECT_TRUE(true);
 }

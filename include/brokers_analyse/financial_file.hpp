@@ -11,6 +11,7 @@ namespace brokers_analyse {
 struct financial_file {
   std::string account;
   std::string date;
+  std::string full_name() const;
 };
 }  // namespace brokers_analyse
 

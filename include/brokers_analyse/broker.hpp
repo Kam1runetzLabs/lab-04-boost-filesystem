@@ -7,6 +7,7 @@
 
 #include <algorithm>
 #include <brokers_analyse/financial_file.hpp>
+#include <map>
 #include <set>
 #include <string>
 #include <vector>

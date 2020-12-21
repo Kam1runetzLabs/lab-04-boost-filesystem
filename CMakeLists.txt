@@ -37,10 +37,14 @@ find_package(Boost CONFIG REQUIRED filesystem)
 add_library(${PROJECT_NAME} STATIC
         include/brokers_analyse.hpp
         include/brokers_analyse/broker.hpp
+        sources/brokers_analyse/broker.cpp
         include/brokers_analyse/financial_file.hpp
         include/brokers_analyse/analysers.hpp
-        sources/analysers.cpp include/tools/thread_pool.hpp
-        sources/tools/thread_pool.cpp include/tools/task.hpp include/tools/callback.hpp sources/brokers_analyse/broker.cpp)
+        sources/brokers_analyse/analysers.cpp
+        include/tools/thread_pool.hpp
+        sources/tools/thread_pool.cpp
+        include/tools/task.hpp
+        include/tools/callback.hpp sources/brokers_analyse/financial_file.cpp)
 
 add_executable(demo_${PROJECT_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}/demo/main.cpp
