@@ -1,7 +1,7 @@
 // Copyright 2020 Kam1runetzLabs <notsoserious2017@gmail.com>
 
-#ifndef BFSYSTEM_TASK_HPP
-#define BFSYSTEM_TASK_HPP
+#ifndef INCLUDE_TOOLS_TASK_HPP_
+#define INCLUDE_TOOLS_TASK_HPP_
 
 #include <functional>
 #include <utility>
@@ -11,4 +11,4 @@ inline auto TASK(task_t&& task, args_t&&... args) {
   return std::bind(std::forward<task_t>(task), std::forward<args_t>(args)...);
 }
 
-#endif  // BFSYSTEM_TASK_HPP
+#endif  // INCLUDE_TOOLS_TASK_HPP_

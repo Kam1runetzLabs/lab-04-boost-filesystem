@@ -1,7 +1,7 @@
 // Copyright 2020 Kam1runetzLabs <notsoserious2017@gmail.com>
 
-#ifndef BFSYSTEM_FINANCIAL_FILE_HPP
-#define BFSYSTEM_FINANCIAL_FILE_HPP
+#ifndef INCLUDE_BROKERS_ANALYSE_FINANCIAL_FILE_HPP_
+#define INCLUDE_BROKERS_ANALYSE_FINANCIAL_FILE_HPP_
 
 #include <string>
 
@@ -24,4 +24,4 @@ class financial_file {
 };
 }  // namespace brokers_analyse
 
-#endif  // BFSYSTEM_FINANCIAL_FILE_HPP
+#endif  // INCLUDE_BROKERS_ANALYSE_FINANCIAL_FILE_HPP_

@@ -1,7 +1,7 @@
 // Copyright 2020 Kam1runetzLabs <notsoserious2017@gmail.com>
 
-#ifndef BFSYSTEM_CALLBACK_HPP
-#define BFSYSTEM_CALLBACK_HPP
+#ifndef INCLUDE_TOOLS_CALLBACK_HPP_
+#define INCLUDE_TOOLS_CALLBACK_HPP_
 
 #include <functional>
 #include <utility>
@@ -12,4 +12,4 @@ inline auto CALLBACK(task_t&& task, args_t&&... args) {
                    std::forward<args_t>(args)...);
 }
 
-#endif  // BFSYSTEM_CALLBACK_HPP
+#endif  // INCLUDE_TOOLS_CALLBACK_HPP_

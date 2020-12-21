@@ -1,7 +1,7 @@
 // Copyright 2020 Kam1runetzLabs <notsoserious2017@gmail.com>
 
-#ifndef BFSYSTEM_THREAD_POOL_HPP
-#define BFSYSTEM_THREAD_POOL_HPP
+#ifndef INCLUDE_TOOLS_THREAD_POOL_HPP_
+#define INCLUDE_TOOLS_THREAD_POOL_HPP_
 
 #include <condition_variable>
 #include <functional>
@@ -39,4 +39,4 @@ class thread_pool {
   bool _is_stopped;
 };
 
-#endif  // BFSYSTEM_THREAD_POOL_HPP
+#endif  // INCLUDE_TOOLS_THREAD_POOL_HPP_

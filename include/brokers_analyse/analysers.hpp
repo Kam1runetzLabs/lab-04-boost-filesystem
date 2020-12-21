@@ -1,7 +1,7 @@
 // Copyright 2020 Kam1runetzLabs <notsoserious2017@gmail.com>
 
-#ifndef BFSYSTEM_ANALYSERS_HPP
-#define BFSYSTEM_ANALYSERS_HPP
+#ifndef INCLUDE_BROKERS_ANALYSE_ANALYSERS_HPP_
+#define INCLUDE_BROKERS_ANALYSE_ANALYSERS_HPP_
 
 #include <boost/filesystem.hpp>
 #include <brokers_analyse/broker.hpp>
@@ -44,4 +44,4 @@ void analyse_all(policy pol, const std::string &path, callback_t &&callback,
 }
 }  // namespace brokers_analyse
 
-#endif  // BFSYSTEM_ANALYSERS_HPP
+#endif  // INCLUDE_BROKERS_ANALYSE_ANALYSERS_HPP_
