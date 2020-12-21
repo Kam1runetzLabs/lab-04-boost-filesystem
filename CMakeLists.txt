@@ -26,6 +26,7 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 string(APPEND CMAKE_CXX_FLAGS " -pedantic -Werror -Wall -Wextra")
 string(APPEND CMAKE_CXX_FLAGS " -Wno-unused-command-line-argument")
 string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
+string(APPEND CMAKE_CXX_FLAGS " -lgcov --coverage")
 string(APPEND CMAKE_CXX_FLAGS " -g")
 
 
