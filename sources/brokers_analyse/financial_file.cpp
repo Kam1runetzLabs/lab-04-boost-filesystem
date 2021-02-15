@@ -8,7 +8,7 @@ namespace brokers_analyse {
 financial_file::financial_file(std::string name, std::string date)
     : _name(std::move(name)), _date(std::move(date)) {}
 
-std::string financial_file::name() const { return _name; }
+std::string financial_file::name() const { return _name + ".txt"; }
 
 void financial_file::set_name(const std::string& name) { _name = name; }
 

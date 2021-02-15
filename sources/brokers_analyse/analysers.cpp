@@ -50,7 +50,8 @@ broker analyse_one(const std::string &path) {
   for (const auto &entry : d_iter{broker_directory}) {
     if (boost::filesystem::is_directory(entry) ||
         !entry.path().filename().stem().extension().string().empty() ||
-        !entry.path().filename().extension().extension().string().empty() ||
+        //        !entry.path().filename().extension().extension().string().empty()
+        //        ||
         entry.path().extension().string() != ".txt")
       continue;
     _processing_filename(entry.path().filename().stem().string(), files);
